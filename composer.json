@@ -1,5 +1,5 @@
 {
-    "name": "sofa/laravel-test-generator",
+    "name": "systemy-flexmind/laravel-test-generator",
     "description": "Don't write boilerplate for your feature tests in a Laravel project",
     "keywords": [
         "laravel-test-generator"
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
         "illuminate/routing": "7.*",
         "nette/php-generator": "^3.4"
     },
