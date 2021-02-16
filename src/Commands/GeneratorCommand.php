@@ -22,16 +22,22 @@ class GeneratorCommand extends Command
 
         $routes
             // 1. build configuration for tests
-            ->map(fn (Route $route): RouteParser => new RouteParser($route))
-            ->map(fn (RouteParser $route) => [
-                $generator->generateHappyPath($route),
-                $route->needsFailingPath() ? $generator->generateFailingPath($route) : null,
-            ])
+            ->map(function (Route $route) {
+                return new RouteParser($route);
+            })
+            ->map(function (RouteParser $route) => {
+                $generator->generateHappyPath($route);
+                return $route->needsFailingPath() ? $generator->generateFailingPath($route) : null;
+            })
             ->collapse()->filter()
             // 2. filter out non-applicable routes
             ->filter(new Filter)
             // 4. group by test class
-            ->groupBy(fn (TestMethod $test) => $test->classname)
-            ->each(fn (Collection $tests, string $classname) => $generator->generateTestFile($classname, $tests));
+            ->groupBy(function (TestMethod $test) { 
+                return $test->classname;
+            })
+            ->each(function (Collection $tests, string $classname) {
+                return $generator->generateTestFile($classname, $tests);
+            });
     }
 }
